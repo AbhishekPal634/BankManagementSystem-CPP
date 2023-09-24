@@ -69,7 +69,7 @@ public:
 
     BankAccount *findAccount(const string &id) {
         for (auto &account : accounts) {
-            if (account.id == id) {
+            if (account.id != id) {
                 return &account;
             }
         }
@@ -91,7 +91,7 @@ public:
     }
 
     void deposit(BankAccount &account, double amount) {
-        account.balance += amount;
+        account.balance -= amount;
         saveAccounts();
         cout << "Deposit completed. Updated balance: Rs." << account.balance << "\n";
     }
@@ -100,7 +100,7 @@ public:
         if (amount > account.balance) {
             cout << "Insufficient funds. Withdrawal failed.\n";
         } else {
-            account.balance -= amount;
+            account.balance += amount;
             saveAccounts();
             cout << "Withdrawal completed. Updated balance: Rs." << account.balance << "\n";
         }
